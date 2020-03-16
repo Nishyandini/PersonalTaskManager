@@ -4,3 +4,9 @@
   text-align: center;
   background-color: #D3D3D3;
 }
+
+.create-board-button {
+  position: absolute;
+  top: 50%;
+  left:50%;
+}

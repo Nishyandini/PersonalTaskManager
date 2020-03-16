@@ -34,6 +34,7 @@ const Card = (props) => {
             date : getCurrentDate()
         }
         setcomments(newComments);
+        setcomment('');
     }
 
     const saveCard = () => {
@@ -60,13 +61,13 @@ const Card = (props) => {
     }, []);
 
     return (
-        <div className='card'>
+        <div className='card task-card'>
             <div className='card-title'>
                 <input
                     type='text'
                     autoComplete='off'
                     name='title'
-                    placeholder='title'
+                    placeholder='Card Title'
                     className='card-title-input'
                     value={title}
                     onChange={handleChange}
@@ -78,7 +79,7 @@ const Card = (props) => {
                 autoComplete='off'
                 name='description'
                 placeholder='Description'
-                className='card-input'
+                className='card-textarea-input'
                 value={description}
                 onChange={handleChange}
             />
@@ -86,13 +87,13 @@ const Card = (props) => {
                 autoComplete='off'
                 name='comment'
                 placeholder='Comment'
-                className='card-input'
+                className='card-textarea-input'
                 value={comment}
                 onChange={handleChange}
             />
             <Button
                 className='card-addcomment-button'
-                variant='outline-secondary'
+                variant={comment.length ===0 ? 'secondary' : 'primary'}
                 disabled={comment.length === 0}
                 onClick={addComment}
             >

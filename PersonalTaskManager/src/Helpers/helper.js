@@ -3,7 +3,7 @@ export function getLocalStorageItem(key) {
         let data = localStorage.getItem(key);
         if(key === 'board') {
             data = data.split(',');
-        } else if (key === 'lastcreatedlistid') {
+        } else if (key === 'lastcreatedlistid'|| key === 'boardtitle') {
             return data;
         } else {
             data = JSON.parse(data);   

@@ -6,14 +6,13 @@ import { getLocalStorageItem, setLocalStorageItem, getNumberFromString, reorderA
 import '../Styles/board.css';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 const Board = () => {
+    const [title, settitle] = useState('');
     const [lists, setlists] = useState([]);
     let boardData = getLocalStorageItem('board');
-
     const addNewList = () => {
         const newListData = lists ? [...lists] : [];
         boardData=getLocalStorageItem('board');
         let lastCreatedListId = getLocalStorageItem('lastcreatedlistid');
-        console.log('sss',lastCreatedListId)
         const key = lastCreatedListId ? getNumberFromString(lastCreatedListId) : 1;
         const id = `li${key}`;
         setLocalStorageItem('lastcreatedlistid', id);
@@ -43,6 +42,11 @@ const Board = () => {
         setlists(newListData);
     };
 
+    const handleChange = (event) => {
+        setLocalStorageItem('boardtitle', event.target.value);
+        settitle(event.target.value);
+    }
+
     const deleteList = listId => {
         boardData = boardData.filter(value => value !== listId);
         if (boardData.length === 0) {
@@ -66,8 +70,8 @@ const Board = () => {
 
     const getItemStyle = (isDragging, draggableStyle) => ({
         userSelect: 'none',
-        padding: 16,
-        margin: `0 16px 0 0`,
+        padding: 2,
+        margin: `0 1px 0 0`,
         minWidth: '400px',
         background: isDragging && 'lightgreen',
       
@@ -79,20 +83,33 @@ const Board = () => {
     const getListStyle = isDraggingOver => ({
         background: isDraggingOver ? 'lightblue' : 'lightgrey',
         display: 'flex',
-        width: '1100px',
-        padding: 8,
-        margin: 10,
+        padding: 4,
+        paddingTop: 60,
+        marginLeft: 0,
+        marginRight:10,
         overflow: 'auto',
+        height: '100vh',
       });
 
     useEffect(() => {
         setlists(boardData);
+        const boardTitle = getLocalStorageItem('boardtitle');
+        settitle(boardTitle);
     }, []);
 
     return (
         <div className='board'>
-            <Container>
-                <Row>
+             <input
+                    type='text'
+                    autoComplete='off'
+                    name='title'
+                    placeholder='Board Name'
+                    className='board-title-input'
+                    value={title}
+                    onChange={handleChange}
+                />
+            {/* <Container>
+                <Row> */}
             <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId="droppable" direction="horizontal">
                     {(provided, snapshot) => (
@@ -126,8 +143,8 @@ const Board = () => {
                     )}
                 </Droppable>
             </DragDropContext>
-            </Row>
-            </Container>
+            {/* </Row>
+            </Container> */}
             <Button className='new-list-button' variant='success' onClick={addNewList}>New List</Button>
             {/* <Container>
                 <Row>

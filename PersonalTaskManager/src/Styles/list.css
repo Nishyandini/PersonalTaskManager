@@ -14,3 +14,8 @@
 .delete-icon {
     float: right;
 }
+
+.update-title-button {
+    display: block !important;
+    float: none !important;
+}

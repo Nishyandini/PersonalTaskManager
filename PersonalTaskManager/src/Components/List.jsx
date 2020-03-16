@@ -11,6 +11,7 @@ const List = props => {
     const [id, setid] = useState(null);
     const [title, settitle] = useState('');
     const [cards, setcards] = useState([]);
+    const [changed, setchanged] = useState(false);
     let totalListData = getLocalStorageItem('lists');
 
     const addNewCard = () => {
@@ -50,6 +51,7 @@ const List = props => {
 
     const handleChange = (event) => {
         settitle(event.target.value);
+        setchanged(true);
     }
 
     const saveList = () => {
@@ -59,6 +61,7 @@ const List = props => {
         };
         totalListData[id] = listData;
         setLocalStorageItem('lists', totalListData);
+        setchanged(false);
     }
 
     const deleteCard = cardId => {
@@ -112,13 +115,22 @@ const List = props => {
                     type='text'
                     autoComplete='off'
                     name='title'
-                    placeholder='title'
+                    placeholder='List Name'
                     className='list-title-input'
                     value={title}
                     onChange={handleChange}
                 />
                 <FontAwesomeIcon className='delete-icon' icon={faMinusCircle} onClick={removeList}></FontAwesomeIcon>
             </div>
+            {
+                    changed && <Button
+                                    className='update-title-button'
+                                    variant='success'
+                                    onClick={saveList}
+                                >
+                                    Update Title
+                                </Button>
+                }
             <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId="droppable" direction="vertical">
                     {(provided, snapshot) => (

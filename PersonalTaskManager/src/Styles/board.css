@@ -1,5 +1,7 @@
-.btn-success {
-    float: right;
+.board-title-input {
+    border: none;
+    background-color: #d3d3d3;
+    font-weight: bold;
 }
 
 .new-list-button {

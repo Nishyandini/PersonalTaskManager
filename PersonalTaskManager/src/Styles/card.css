@@ -1,5 +1,7 @@
-.card {
-    border: 1px solid #c4c4c4;
+.task-card {
+    /* border: 1px solid #9c9c9c !important; */
+    /* border: none !important; */
+    padding: 5px;
     margin-bottom: 10px;
     margin-top: 10px;
 }
@@ -11,18 +13,23 @@
     margin-left: 5px;
 }
 
+.card-textarea-input {
+    margin-bottom: 2px;
+    border: none;
+}
+
 .btn {
     float: right;
     margin-right: 5px;
     margin-top: 2px;
 }
 
-.card-addcomment-button {
+/* .card-addcomment-button {
     margin: 5px auto;
     padding: 0 !important;
     font-size: 6px;
     width: 30%;
-}
+} */
 
 .comment-text {
     float: left;
